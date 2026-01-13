@@ -167,7 +167,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [MIT](LICENSE)
 
-## Step 10: Example Usage Script
+## Example Usage Script
 
 Let's create an example script that demonstrates how to use the project:
 
