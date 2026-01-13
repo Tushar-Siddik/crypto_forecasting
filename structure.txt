@@ -1,0 +1,24 @@
+crypto_forecasting/
+├── data/
+│   └── raw/
+├── models/
+├── notebooks/
+├── src/
+│   ├── __init__.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── data_loader.py
+│   │   └── feature_engineering.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── lstm.py
+│   │   ├── transformer.py
+│   │   └── train.py
+│   ├── evaluation/
+│   │   ├── __init__.py
+│   │   └── metrics.py
+│   └── deployment/
+│       ├── __init__.py
+│       └── api.py
+├── requirements.txt
+└── README.md
