@@ -1,0 +1,108 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual Environments
+# =========================
+venv/
+.venv/
+env/
+ENV/
+.env/
+.env*/
+
+# =========================
+# Jupyter Notebooks
+# =========================
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# =========================
+# Data (raw, processed, external)
+# =========================
+data/
+datasets/
+raw_data/
+processed_data/
+external_data/
+data/*
+!data/sample/
+!data/sample/**
+*.csv
+*.tsv
+*.xlsx
+*.parquet
+
+# =========================
+# Models & Artifacts
+# =========================
+models/
+checkpoints/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+
+# =========================
+# Experiments & Outputs
+# =========================
+outputs/
+results/
+runs/
+logs/
+mlruns/          # MLflow
+wandb/           # Weights & Biases
+
+# =========================
+# Plots & Reports
+# =========================
+figures/
+plots/
+reports/
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# =========================
+# Caches
+# =========================
+.cache/
+.pytest_cache/
+.mypy_cache/
+ruff_cache/
+
+# =========================
+# Build / Distribution
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# IDEs / Editors
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Secrets & Credentials
+# =========================
+*.env
+.env.local
+.env.production
+credentials.json
