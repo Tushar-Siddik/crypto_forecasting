@@ -24,51 +24,49 @@ ENV/
 # =========================
 # Data (raw, processed, external)
 # =========================
-data/
-datasets/
-raw_data/
-processed_data/
-external_data/
-data/*
-!data/sample/
-!data/sample/**
-*.csv
-*.tsv
-*.xlsx
-*.parquet
+# datasets/
+# raw_data/
+# processed_data/
+# external_data/
+# !data/sample/
+# !data/sample/**
+# *.csv
+# *.tsv
+# *.xlsx
+# *.parquet
 
 # =========================
 # Models & Artifacts
 # =========================
-models/
+# models/
 checkpoints/
-*.pkl
-*.joblib
-*.h5
-*.pt
-*.onnx
+# *.pkl
+# *.joblib
+# *.h5
+# *.pt
+# *.onnx
 
 # =========================
 # Experiments & Outputs
 # =========================
-outputs/
-results/
-runs/
-logs/
-mlruns/          # MLflow
-wandb/           # Weights & Biases
+# outputs/
+# results/
+# runs/
+# logs/
+# mlruns/          # MLflow
+# wandb/           # Weights & Biases
 
 # =========================
 # Plots & Reports
 # =========================
-figures/
-plots/
-reports/
-*.png
-*.jpg
-*.jpeg
-*.svg
-*.pdf
+# figures/
+# plots/
+# reports/
+# *.png
+# *.jpg
+# *.jpeg
+# *.svg
+# *.pdf
 
 # =========================
 # Caches
