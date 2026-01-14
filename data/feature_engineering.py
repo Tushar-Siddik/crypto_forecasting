@@ -72,8 +72,19 @@ class FeatureEngineer:
             data['ATR'] = ta.volatility.AverageTrueRange(high=data['High'], low=data['Low'], close=data['Close']).average_true_range()
             data['Keltner_High'] = ta.volatility.KeltnerChannel(high=data['High'], low=data['Low'], close=data['Close']).keltner_channel_hband()
             data['Keltner_Low'] = ta.volatility.KeltnerChannel(high=data['High'], low=data['Low'], close=data['Close']).keltner_channel_lband()
-            data['Donchian_High'] = ta.volatility.DonchianChannel(high=data['High'], low=data['Low']).donchian_channel_hband()
-            data['Donchian_Low'] = ta.volatility.DonchianChannel(high=data['High'], low=data['Low']).donchian_channel_lband()
+            
+            # Donchian Channel
+            donchian = ta.volatility.DonchianChannel(high=data['High'], low=data['Low'], close=data['Close'])
+            data['Donchian_High'] = donchian.donchian_channel_hband()
+            data['Donchian_Low'] = donchian.donchian_channel_lband()
+
+            # data['Donchian_High'] = ta.volatility.DonchianChannel(high=data['High'], low=data['Low']).donchian_channel_hband()
+            # data['Donchian_Low'] = ta.volatility.DonchianChannel(high=data['High'], low=data['Low']).donchian_channel_lband()
+            
+            # # Donchian Channel - added close parameter
+            # donchian = ta.volatility.DonchianChannel(high=data['High'], low=data['Low'], close=data['Close'])
+            # data['Donchian_High'] = donchian.donchian_channel_hband()
+            # data['Donchian_Low'] = donchian.donchian_channel_lband()
             
             # Volume indicators (if Volume column exists)
             if 'Volume' in data.columns:
@@ -86,8 +97,22 @@ class FeatureEngineer:
                 data['FI'] = ta.volume.ForceIndexIndicator(close=data['Close'], volume=data['Volume']).force_index()
                 data['EMV'] = ta.volume.EaseOfMovementIndicator(high=data['High'], low=data['Low'], volume=data['Volume']).ease_of_movement()
                 data['VPT'] = ta.volume.VolumePriceTrendIndicator(close=data['Close'], volume=data['Volume']).volume_price_trend()
-                data['NVI'] = ta.volume.NegativeVolumeIndexIndicator(close=data['Close']).negative_volume_index()
-                data['PVI'] = ta.volume.PositiveVolumeIndexIndicator(close=data['Close']).positive_volume_index()
+                data['NVI'] = ta.volume.NegativeVolumeIndexIndicator(close=data['Close'], volume=data['Volume']).negative_volume_index()
+                
+                # Manual implementation of Positive Volume Index
+                def positive_volume_index(close, volume):
+                    pvi = pd.Series(index=close.index, dtype=float)
+                    pvi.iloc[0] = 100  # Starting value
+                    
+                    for i in range(1, len(close)):
+                        if volume.iloc[i] > volume.iloc[i-1]:
+                            pvi.iloc[i] = pvi.iloc[i-1] * (1 + (close.iloc[i] - close.iloc[i-1]) / close.iloc[i-1])
+                        else:
+                            pvi.iloc[i] = pvi.iloc[i-1]
+                    
+                    return pvi
+                                
+                data['PVI'] = positive_volume_index(close=data['Close'], volume=data['Volume'])
             
             # Statistical features
             data['Volatility'] = data['Log_Return'].rolling(window=20).std()
@@ -130,6 +155,7 @@ class FeatureEngineer:
             
         except Exception as e:
             logger.error(f"Error adding technical indicators: {e}")
+            # Return the original data if there's an error
             return df
     
     def create_sequences(self, data: pd.DataFrame, sequence_length: int, 
