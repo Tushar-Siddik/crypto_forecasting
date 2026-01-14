@@ -148,6 +148,10 @@ def calculate_returns(prices: np.ndarray, method: str = 'simple') -> np.ndarray:
     Returns:
         Returns series
     """
+    # Ensure prices is 1D
+    if prices.ndim > 1:
+        prices = prices.flatten()
+    
     if method == 'simple':
         returns = np.diff(prices) / prices[:-1]
     elif method == 'log':
