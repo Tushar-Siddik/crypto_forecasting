@@ -172,7 +172,17 @@ def calculate_volatility(returns: np.ndarray, window_size: int = 30) -> np.ndarr
     Returns:
         Rolling volatility
     """
-    return pd.Series(returns).rolling(window=window_size).std().values
+    # Ensure returns is 1D
+    if returns.ndim > 1:
+        returns = returns.flatten()
+    
+    # Calculate rolling volatility
+    volatility = pd.Series(returns).rolling(window=window_size).std().values
+    
+    # Remove NaN values at the beginning
+    volatility = volatility[window_size-1:]
+    
+    return volatility
 
 def format_large_number(number: float, precision: int = 2) -> str:
     """Format large numbers with appropriate suffixes"""
