@@ -1,0 +1,7 @@
+{
+    "model_name": "LSTMAttention",
+    "input_size": 50,
+    "output_size": 1,
+    "total_parameters": 884481,
+    "trainable_parameters": 884481
+}

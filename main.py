@@ -26,9 +26,12 @@ from training.trainer import ModelTrainer
 from training.hyperparameter_tuning import HyperparameterTuner
 from evaluation.metrics import CryptoModelEvaluator
 from evaluation.visualizer import ModelVisualizer
-from utils import logger
+from utils.logger import logger
 from utils.logger import setup_logger
 from utils.helpers import set_seed, save_results, create_timestamp
+
+# Set up logging
+logger.info("Starting Cryptocurrency Forecasting System")
 
 def main():
     """Main function to run the cryptocurrency forecasting system"""
@@ -77,6 +80,34 @@ def main():
         evaluate_model(config, device)
     elif args.mode == 'deploy':
         deploy_model(config, device)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Cryptocurrency Forecasting System')
+    
+    # Basic arguments
+    parser.add_argument('--mode', choices=['train', 'tune', 'n-trials', 'evaluate', 'deploy'], 
+                       help='Operation mode')
+    
+    # Model selection
+    parser.add_argument('--model', 
+                       choices=['lstm_attention', 'n_trials=100'])
+    
+    # Hyperparameter tuning arguments
+    parser.add_argument('--n-trials', type=int, default=100,
+                       help='Number of hyperparameter trials for tuning')
+    
+    # Other arguments
+    parser.add_argument('--ticker', type=str, default='BTC-2023',
+                       help='Cryptocurrency ticker (e.g., BTC-2023)')
+    
+    parser.add_argument('--gpu', action='store_true',
+                       help='Use GPU if available')
+    
+    parser.add_argument('--seed', type=int, default=42,
+                       help='Random seed for reproducibility')
+    
+    return parser.parse_args()
 
 def train_model(config: Config, device: torch.device) -> None:
     """Train a model"""

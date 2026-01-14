@@ -17,6 +17,7 @@ sys.path.append(str(project_root))
 from training.trainer import ModelTrainer
 from models.lstm_attention import LSTMAttention, GRUAttention
 from models.transformer import TransformerModel, InformerModel
+from utils.logger import logger
 from utils.logger import setup_logger
 
 logger = setup_logger(__name__)
