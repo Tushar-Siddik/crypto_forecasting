@@ -37,8 +37,17 @@ class CryptoDataLoader:
                 logger.warning(f"No data found for {ticker}")
                 return pd.DataFrame()
             
+            # Ensure single-level columns
+            if isinstance(data.columns, pd.MultiIndex):
+                data.columns = [col[0] for col in data.columns]
+            
             # Add ticker column
             data['Ticker'] = ticker
+
+            # Ensure Close is a Series, not DataFrame
+            if isinstance(data['Close'], pd.DataFrame):
+                data['Close'] = data['Close'].iloc[:, 0]
+        
             
             if save:
                 file_path = os.path.join(self.data_dir, f"{ticker}_{start_date}_{end_date}.csv")
