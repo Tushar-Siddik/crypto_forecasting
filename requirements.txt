@@ -28,6 +28,7 @@ greenlet==3.3.0
 h11==0.16.0
 html5lib==1.1
 idna==3.11
+iniconfig==2.3.0
 ipykernel==7.1.0
 ipython==9.9.0
 ipython_pygments_lexers==1.1.1
@@ -59,6 +60,7 @@ peewee==3.19.0
 pillow==12.1.0
 platformdirs==4.5.1
 plotly==6.5.1
+pluggy==1.6.0
 prompt_toolkit==3.0.52
 protobuf==6.33.4
 psutil==7.2.1
@@ -69,6 +71,7 @@ pydantic==2.12.5
 pydantic_core==2.41.5
 Pygments==2.19.2
 pyparsing==3.0.9
+pytest==9.0.2
 python-dateutil==2.9.0.post0
 python-multipart==0.0.21
 pytz==2025.2
