@@ -1,4 +1,10 @@
 # training/trainer.py
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -12,8 +18,8 @@ import logging
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-from ..evaluation.metrics import CryptoModelEvaluator
-from ..utils.logger import setup_logger
+from evaluation.metrics import CryptoModelEvaluator
+from utils.logger import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -69,7 +75,7 @@ class ModelTrainer:
         # Learning rate scheduler
         if scheduler_type == 'reduce_on_plateau':
             scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-                optimizer, mode='min', factor=0.5, patience=patience//2, verbose=True
+                optimizer, mode='min', factor=0.5, patience=patience//2
             )
         elif scheduler_type == 'cosine':
             scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
@@ -93,6 +99,9 @@ class ModelTrainer:
             if scheduler:
                 if scheduler_type == 'reduce_on_plateau':
                     scheduler.step(val_loss)
+                    # Log learning rate change manually
+                    current_lr = optimizer.param_groups[0]['lr']
+                    logger.info(f"Learning rate updated to {current_lr:.2e}")
                 else:
                     scheduler.step()
             
@@ -221,7 +230,10 @@ class ModelTrainer:
         
         logger.info("Evaluation Metrics:")
         for metric, value in metrics.items():
-            logger.info(f"  {metric}: {value:.4f}")
+            if value is not None:
+                logger.info(f"  {metric}: {value:.4f}")
+            else:
+                logger.info(f"  {metric}: N/A")
         
         return metrics, predictions, actuals
     
