@@ -1,4 +1,5 @@
 # evaluation/visualizer.py
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -136,6 +137,8 @@ class ModelVisualizer:
         plt.tight_layout()
         
         if save_path:
+            # Create directory if it doesn't exist
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
             logger.info(f"Model comparison plot saved to {save_path}")
         
