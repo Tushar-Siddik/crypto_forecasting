@@ -35,7 +35,11 @@ class CryptoModelEvaluator:
         mae = mean_absolute_error(y_true, y_pred)
         mse = mean_squared_error(y_true, y_pred)
         rmse = np.sqrt(mse)
-        mape = mean_absolute_percentage_error(y_true, y_pred)
+        # MAPE with error handling for zero values
+        try:
+            mape = mean_absolute_percentage_error(y_true, y_pred)
+        except:
+            mape = None
         
         # Financial-specific metrics
         directional_accuracy = self._directional_accuracy(y_true, y_pred)
@@ -49,22 +53,40 @@ class CryptoModelEvaluator:
             mase = None
         
         # Sharpe ratio (based on prediction errors)
-        sharpe_ratio = self._sharpe_ratio(y_true, y_pred)
+        try:
+            sharpe_ratio = self._sharpe_ratio(y_true, y_pred)
+        except:
+            sharpe_ratio = None
         
         # Maximum drawdown
-        max_drawdown = self._max_drawdown(y_true, y_pred)
-        
+        try:
+            max_drawdown = self._max_drawdown(y_true, y_pred)
+        except:
+            max_drawdown = None
+    
         # Information ratio
-        information_ratio = self._information_ratio(y_true, y_pred)
+        try:
+            information_ratio = self._information_ratio(y_true, y_pred)
+        except:
+            information_ratio = None
         
         # Hit rate (percentage of correct direction predictions)
-        hit_rate = self._hit_rate(y_true, y_pred)
+        try:
+            hit_rate = self._hit_rate(y_true, y_pred)
+        except:
+            hit_rate = None
         
         # Average return
-        avg_return = self._average_return(y_true, y_pred)
+        try:
+            avg_return = self._average_return(y_true, y_pred)
+        except:
+            avg_return = None
         
         # Volatility of errors
-        error_volatility = self._error_volatility(y_true, y_pred)
+        try:
+            error_volatility = self._error_volatility(y_true, y_pred)
+        except:
+            error_volatility = None
         
         return {
             'MAE': mae,
@@ -96,6 +118,13 @@ class CryptoModelEvaluator:
     def _mase(self, y_true: np.ndarray, y_pred: np.ndarray, y_train: np.ndarray) -> float:
         """Calculate Mean Absolute Scaled Error"""
         naive_error = np.mean(np.abs(y_train[1:] - y_train[:-1]))
+        if naive_error == 0:
+            # If naive error is 0, return a large value to indicate poor performance
+            # or return None to indicate the metric is not applicable
+            return None
+            # Alternative: return a very large number
+            # return float('inf')
+
         mae = mean_absolute_error(y_true, y_pred)
         return mae / naive_error if naive_error != 0 else np.inf
     
