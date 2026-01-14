@@ -3,7 +3,13 @@ import torch
 import torch.nn as nn
 import math
 from typing import Optional
-from .base_model import BaseModel
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
+from models.base_model import BaseModel
 
 class MultiHeadAttention(nn.Module):
     """Multi-Head Attention mechanism"""

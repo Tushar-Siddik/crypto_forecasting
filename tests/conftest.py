@@ -4,6 +4,11 @@ import torch
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
 
 @pytest.fixture
 def sample_data():

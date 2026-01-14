@@ -2,6 +2,11 @@
 import os
 from dataclasses import dataclass
 from typing import List, Optional
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
 
 @dataclass
 class DataConfig:

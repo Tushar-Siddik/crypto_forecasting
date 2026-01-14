@@ -3,6 +3,11 @@ import logging
 import os
 from datetime import datetime
 from typing import Optional
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
 
 def setup_logger(name: str, log_file: Optional[str] = None, 
                 level: int = logging.INFO) -> logging.Logger:

@@ -2,7 +2,13 @@
 import torch
 import torch.nn as nn
 from typing import List, Dict, Any
-from .base_model import BaseModel
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
+from models.base_model import BaseModel
 
 class EnsembleModel(BaseModel):
     """Ensemble of multiple models"""

@@ -8,6 +8,12 @@ from typing import Dict, List, Optional, Any
 import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 import logging
 
 logger = logging.getLogger(__name__)

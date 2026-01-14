@@ -8,6 +8,11 @@ import tempfile
 import os
 import sys
 
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 # Add src to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 

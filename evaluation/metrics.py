@@ -3,6 +3,12 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, mean_absolute_percentage_error
 from typing import Dict, List, Optional, Any
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 import logging
 
 logger = logging.getLogger(__name__)

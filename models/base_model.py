@@ -3,6 +3,12 @@ import torch
 import torch.nn as nn
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 import logging
 
 logger = logging.getLogger(__name__)

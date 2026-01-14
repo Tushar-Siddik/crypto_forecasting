@@ -8,11 +8,16 @@ import logging
 import json
 import os
 from datetime import datetime
+import sys
+from pathlib import Path
 
-from .trainer import ModelTrainer
-from ..models.lstm_attention import LSTMAttention, GRUAttention
-from ..models.transformer import TransformerModel, InformerModel
-from ..utils.logger import setup_logger
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
+from training.trainer import ModelTrainer
+from models.lstm_attention import LSTMAttention, GRUAttention
+from models.transformer import TransformerModel, InformerModel
+from utils.logger import setup_logger
 
 logger = setup_logger(__name__)
 

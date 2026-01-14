@@ -7,6 +7,11 @@ from datetime import datetime
 import json
 import torch
 
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 # Add the src directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 

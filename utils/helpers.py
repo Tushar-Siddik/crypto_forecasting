@@ -7,6 +7,11 @@ from typing import List, Dict, Any, Optional, Tuple
 import json
 import os
 from datetime import datetime
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
 
 def set_seed(seed: int = 42) -> None:
     """Set random seed for reproducibility"""

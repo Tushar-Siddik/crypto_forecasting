@@ -5,6 +5,12 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
 from typing import Tuple, Optional, Dict, Any
 import joblib
 import os
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 import logging
 
 logger = logging.getLogger(__name__)

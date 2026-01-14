@@ -3,8 +3,14 @@ import torch
 import torch.nn as nn
 import math
 from typing import Optional
-from .base_model import BaseModel
-from .lstm_attention import PositionalEncoding
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
+from models.base_model import BaseModel
+from models.lstm_attention import PositionalEncoding
 
 class TransformerModel(BaseModel):
     """Transformer model for time series forecasting"""

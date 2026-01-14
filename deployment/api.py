@@ -11,15 +11,21 @@ import asyncio
 import logging
 import json
 import os
+import sys
+from pathlib import Path
+
+project_root = Path.cwd().parent
+sys.path.append(str(project_root))
+
 import joblib
 from contextlib import asynccontextmanager
 
-from ..data.data_loader import CryptoDataLoader
-from ..data.feature_engineering import FeatureEngineer
-from ..data.preprocessor import DataPreprocessor
-from ..models.lstm_attention import LSTMAttention
-from ..models.transformer import TransformerModel
-from ..utils.logger import setup_logger
+from data.data_loader import CryptoDataLoader
+from data.feature_engineering import FeatureEngineer
+from data.preprocessor import DataPreprocessor
+from models.lstm_attention import LSTMAttention
+from models.transformer import TransformerModel
+from utils.logger import setup_logger
 
 logger = setup_logger(__name__)
 
