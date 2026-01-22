@@ -458,7 +458,7 @@ mypy src/
 If you use this system in your research, please cite:
 
 ```bibtex
-@misc{crypto_forecasting_system,
+@misc{crypto_forecasting,
   title={Cryptocurrency Forecasting System},
   author={Md. Siddiqur Rahman},
   year={2026},
